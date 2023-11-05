@@ -1,0 +1,15 @@
+* Todo
+
+A simple task tracker tool for the command line
+
+#+begin_src sh :results output
+./todo
+#+end_src
+
+
+** Ideas
+ - add flags to handle different actions
+   - delete
+   - update state
+   - reorder
+ - support "projects" by utilizing different files
