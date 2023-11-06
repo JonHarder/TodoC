@@ -82,12 +82,9 @@ void free_todo(struct todo_t* todo) {
 
 void free_todo_list(struct todo_list_t* todos) {
   for (int i = 0; i<todos->len; i++) {
-    printf("freeing todo item %i out of %zu\n", i+1, todos->len);
     free_todo(todos->todos[i]);
-    printf("freed   todo item %i\n", i+1);
   }
   free(todos->todos);
-  printf("freed   all todos. freeing list itself now.\n");
   free(todos);
 }
 
