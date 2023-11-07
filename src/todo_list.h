@@ -33,3 +33,5 @@ save_todos(struct todo_list_t todos);
 
 struct todo_list_t*
 read_todos();
+
+void clear_todos();

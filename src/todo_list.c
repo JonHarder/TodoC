@@ -47,6 +47,11 @@ void free_todo_list(struct todo_list_t* todos) {
 }
 
 void print_todo_list(struct todo_list_t todos) {
+  if (todos.len == 0) {
+    printf("No Tasks!\n");
+    return;
+  }
+
   for (int i=0; i<todos.len; i++) {
     if(i+1 < 10) {
       printf("%i.  ", i+1);
