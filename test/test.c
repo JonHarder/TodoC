@@ -37,9 +37,13 @@ void test_empty_list() {
   TestEnd();
 }
 
-void test_fails() {
-  TestStart("test_fails");
-  assert(1 == 2);
+void test_adding_to_empty_list_increments_len() {
+  TestStart("test_adding_to_empty_list_increments_len");
+  struct todo_list_t* list = empty_todo_list();
+  size_t initial_len = list->len;
+  struct todo_t* todo = create_todo("a task");
+  add_todo(list, todo);
+  assert(initial_len+1 == list->len);
   TestEnd();
 }
 
@@ -50,7 +54,7 @@ int main(int argc, char *argv[]) {
   done = 0;
   // BEGIN TESTS
   test_empty_list();
-  test_fails();
+  test_adding_to_empty_list_increments_len();
   // END TESTS
   printf("Total tests passed: %d\n", tests_passed);
   return !(tests_passed == num_tests);

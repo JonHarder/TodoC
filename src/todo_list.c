@@ -129,3 +129,16 @@ struct todo_list_t* read_todos() {
   }
   return todos;
 }
+
+
+// id is 0 indexed.
+void update_todo(struct todo_list_t* todos, int id) {
+  if (id >= todos->len) {
+    printf("No task with id %i\n", id+1);
+    return;
+  }
+  struct todo_t* todo = todos->todos[id];
+  if (++todo->state == TODO_STATE_MAX) {
+    todo->state = TODO;
+  }
+}

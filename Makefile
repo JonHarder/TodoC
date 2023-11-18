@@ -1,2 +1,15 @@
-todo: src/*.c
-	mkdir -p build && clang src/main.c src/todo.c src/todo_list.c src/config.c -o build/todo
+CC = clang
+
+CFILES = $(wildcard src/*.c)
+CFLAGS = -Wall
+
+OBJFILES = $(CFILES:.c=.o)
+OUT = src/main
+
+
+$(OUT): $(OBJFILES)
+
+
+.PHONY: clean
+clean:
+	rm -f $(OBJFILES) $(OUT)

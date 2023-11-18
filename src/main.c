@@ -9,6 +9,7 @@ struct options_t {
   bool clear;
   char* task;
   bool list_tasks;
+  int update_id;
   int delete_id;
 };
 
@@ -22,11 +23,12 @@ void print_help(char* name) {
   printf("  -h\t\t\tPrint this help\n");
   printf("  -l\t\t\tList tasks\n");
   printf("  -t <task>\t\tAdd the task <task> to the list\n");
+  printf("  -u <id>\t\tUpdate the task number <id> to the next status\n");
 }
 
 void parse_args(int *argc, char **argv[], struct options_t* options) {
   int opt;
-  while((opt = getopt(*argc, *argv, "cd:hlt:")) != -1) {
+  while((opt = getopt(*argc, *argv, "cd:hlt:u:")) != -1) {
     switch (opt) {
     case 'c': // mutually exclusive
       options->clear = true;
@@ -40,6 +42,9 @@ void parse_args(int *argc, char **argv[], struct options_t* options) {
     case 'h':
       print_help(basename(*argv[0]));
       exit(0);
+    case 'u':
+      options->update_id = atoi(optarg);
+      break;
     case 'l':
     case '?':
     default:
@@ -56,6 +61,7 @@ int main(int argc, char *argv[]) {
     .clear = false,
     .task = "",
     .delete_id = -1,
+    .update_id = -1,
     .list_tasks = false
   };
   parse_args(&argc, &argv, &options);
@@ -87,8 +93,15 @@ int main(int argc, char *argv[]) {
     save_todos(*todos);
   }
 
+  if (options.update_id != -1) {
+    update_todo(todos, options.update_id-1);
+    save_todos(*todos);
+  }
+
   if (options.delete_id != -1) {
-    // TODO
+    // TODO, how to handle removal of elements from growable list?
+    // I'd like to avoid having to shift all the memory after the
+    // element, but mayke that can't be avoided.
     printf("Not Implimented!\n");
   }
 

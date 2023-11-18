@@ -35,3 +35,5 @@ struct todo_list_t*
 read_todos();
 
 void clear_todos();
+
+void update_todo(struct todo_list_t* todos, int id);

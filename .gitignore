@@ -1,2 +1,4 @@
 /build/
 /test/test
+/src/*.o
+/src/main

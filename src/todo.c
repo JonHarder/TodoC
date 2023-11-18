@@ -38,6 +38,9 @@ void print_todo(struct todo_t todo) {
   case DONE:
     strcpy(state_str, "[X]\0");
     break;
+  case TODO_STATE_MAX:
+    printf("STATE SET TO TODO_STATE_MAX! This shouldn't be possible\n");
+    exit(1);
   }
   
   printf("%s %-45s\e[3mCreated: %s\e[0m\n", state_str, todo.task, time_str);

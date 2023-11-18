@@ -2,6 +2,7 @@ enum todo_state {
   TODO,
   IN_PROGRESS,
   DONE,
+  TODO_STATE_MAX,
 };
 
 struct todo_t {
