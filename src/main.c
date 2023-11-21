@@ -23,7 +23,7 @@ void print_help(char* name) {
   printf("  -r <id>\t\tRemove task in position <id>\n");
   printf("  -h\t\t\tPrint this help\n");
   printf("  -l\t\t\tList tasks (implied action when no arguments given)\n");
-  printf("  -t <task>\t\tAdd the task <task> to the list\n");
+  printf("  -t <task>\t\tAdd the task <task> to the list (implied when one positional argument given)\n");
   printf("  -p\t\t\tPrint tasks plainly e.g. without any ascii formatting characters\n");
   printf("  -u <id>\t\tUpdate the task number <id> to the next status\n");
 }

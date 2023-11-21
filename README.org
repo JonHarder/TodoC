@@ -76,7 +76,7 @@ A simple task tracker tool for the command line
     -r <id>		Remove task in position <id>
     -h			Print this help
     -l			List tasks (implied action when no arguments given)
-    -t <task>		Add the task <task> to the list
+    -t <task>		Add the task <task> to the list (implied when one positional argument given)
     -p			Print tasks plainly e.g. without any ascii formatting characters
     -u <id>		Update the task number <id> to the next status
   #+end_example
