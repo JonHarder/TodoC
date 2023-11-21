@@ -2,19 +2,79 @@
 
 A simple task tracker tool for the command line
 
-#+begin_src sh :results output
-todo -p
-#+end_src
 
-#+RESULTS:
-: 1.  [ ] create lambda user group in IAM              Created: Mon Nov 20 11:46:41 2023
-: 2.  [ ] schedule eye appointment                     Created: Mon Nov 20 11:51:55 2023
+** Usage
 
+  Just call the binary to print the current list of tasks[fn:1]
 
+  #+begin_src sh :results output
+  todo -p
+  #+end_src
+  
+  #+RESULTS:
+  : 1.  [ ] Schedule eye appointment                     Created: Mon Nov 20 19:26:03 2023
+  : 2.  [ ] Replace filter                               Created: Mon Nov 20 19:26:20 2023
+
+  Adding a task is easy. Just tell ~todo~ what you need to do (using quotes
+  to avoid shell argument parsing and/or globbing)
+
+  #+begin_src sh :results output
+    todo -p 'File taxes'
+  #+end_src
+
+  #+RESULTS:
+  : 1.  [ ] Schedule eye appointment                     Created: Mon Nov 20 19:26:03 2023
+  : 2.  [ ] Replace filter                               Created: Mon Nov 20 19:26:20 2023
+  : 3.  [ ] File taxes                                   Created: Mon Nov 20 19:29:52 2023
+
+  And updating can be done using ~-u~:
+
+  #+begin_src sh :results output
+    todo -p -u 2
+  #+end_src
+
+  #+RESULTS:
+  : 1.  [ ] Schedule eye appointment                     Created: Mon Nov 20 19:26:03 2023
+  : 2.  [-] Replace filter                               Created: Mon Nov 20 19:26:20 2023
+  : 3.  [ ] File taxes                                   Created: Mon Nov 20 19:29:52 2023
+
+  Tasks are either in the =Todo= state, =In Progress=, or =Done= (represented
+  by ~[ ]~, ~[-]~, and ~[X]~, respectively)
+
+  #+begin_src sh :results output
+    todo -p -u 2
+  #+end_src
+
+  #+RESULTS:
+  : 1.  [ ] Schedule eye appointment                     Created: Mon Nov 20 19:26:03 2023
+  : 2.  [X] Replace filter                               Created: Mon Nov 20 19:26:20 2023
+  : 3.  [ ] File taxes                                   Created: Mon Nov 20 19:29:52 2023
+
+  Tasks can be removed from the list with ~-r <num>~:
+
+  #+begin_src sh :results output
+    todo -p -r 1
+  #+end_src
+
+  #+RESULTS:
+  : 1.  [X] Replace filter                               Created: Mon Nov 20 19:26:20 2023
+  : 2.  [ ] File taxes                                   Created: Mon Nov 20 19:29:52 2023
 
 ** Ideas
+ * add ~due~ field
+   * additional formatting for tasks that are:
+     1. near due
+     2. overdue
+ * add new items to top of list?
  * config file to control default settings
-   * like ~-p~ for plain printing (or env vars?)
- - add flags to handle different actions
+   * setting flags like ~-p~ for plain printing (or env vars?)
+ * add flags to handle different actions
    - reorder
- - support "projects" by utilizing different files
+   * update due field
+ * support "projects" by utilizing different files
+
+* Footnotes
+
+[fn:1] The ~-p~ flag is given here for printing plainly
+  (without text formatting control characters), by default
+  the creation date is italicized.

@@ -20,9 +20,9 @@ void print_help(char* name) {
   printf("\n");
   printf("Arguments:\n");
   printf("  -c\t\t\tClear the current todo list of all tasks (can't be undone)\n");
-  printf("  -d <id>\t\tDelete task in position <id>\n");
+  printf("  -r <id>\t\tRemove task in position <id>\n");
   printf("  -h\t\t\tPrint this help\n");
-  printf("  -l\t\t\tList tasks\n");
+  printf("  -l\t\t\tList tasks (implied action when no arguments given)\n");
   printf("  -t <task>\t\tAdd the task <task> to the list\n");
   printf("  -p\t\t\tPrint tasks plainly e.g. without any ascii formatting characters\n");
   printf("  -u <id>\t\tUpdate the task number <id> to the next status\n");
@@ -30,7 +30,7 @@ void print_help(char* name) {
 
 void parse_args(int *argc, char **argv[], struct options_t* options) {
   int opt;
-  while((opt = getopt(*argc, *argv, "cd:hplt:u:")) != -1) {
+  while((opt = getopt(*argc, *argv, "cr:hplt:u:")) != -1) {
     switch (opt) {
     case 'c': // mutually exclusive
       options->clear = true;
@@ -38,7 +38,7 @@ void parse_args(int *argc, char **argv[], struct options_t* options) {
     case 't': // mutually exclusive
       options->task = optarg;
       break;
-    case 'd': // mutually exclusive
+    case 'r': // mutually exclusive
       options->delete_id = atoi(optarg);
       break;
     case 'h':
