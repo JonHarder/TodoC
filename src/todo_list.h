@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <stdbool.h>
 #include "todo.h"
 
 struct todo_list_t {
@@ -26,7 +27,7 @@ void
 free_todo_list(struct todo_list_t* todos);
 
 void
-print_todo_list(struct todo_list_t todos);
+print_todo_list(struct todo_list_t todos, bool plain);
 
 int
 save_todos(struct todo_list_t todos);
@@ -37,3 +38,5 @@ read_todos();
 void clear_todos();
 
 void update_todo(struct todo_list_t* todos, int id);
+
+bool delete_todo(struct todo_list_t* todos, uint8_t id);

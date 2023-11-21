@@ -1,3 +1,5 @@
+#include <stdbool.h>
+
 enum todo_state {
   TODO,
   IN_PROGRESS,
@@ -17,7 +19,7 @@ struct todo_t*
 create_todo(char* task);
 
 void
-print_todo(struct todo_t todo);
+print_todo(struct todo_t todo, bool plain);
 
 struct todo_t*
 read_todo(char* str);

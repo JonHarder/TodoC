@@ -46,7 +46,7 @@ void free_todo_list(struct todo_list_t* todos) {
   free(todos);
 }
 
-void print_todo_list(struct todo_list_t todos) {
+void print_todo_list(struct todo_list_t todos, bool plain) {
   if (todos.len == 0) {
     printf("No Tasks!\n");
     return;
@@ -58,7 +58,7 @@ void print_todo_list(struct todo_list_t todos) {
     } else {
       printf("%i. ", i+1);
     }
-    print_todo(*todos.todos[i]);
+    print_todo(*todos.todos[i], plain);
   }
 }
 
@@ -127,6 +127,7 @@ struct todo_list_t* read_todos() {
   if(line) {
     free(line);
   }
+  // todos->len--;
   return todos;
 }
 
@@ -141,4 +142,28 @@ void update_todo(struct todo_list_t* todos, int id) {
   if (++todo->state == TODO_STATE_MAX) {
     todo->state = TODO;
   }
+}
+
+bool delete_todo(struct todo_list_t* todos, uint8_t id) {
+  if (todos->len == 0) {
+    errno = EDOM;
+    perror("There are no tasks to delete");
+    return false;
+  }
+  if (id > todos->len) {
+    errno = EDOM;
+    perror("Task ID does not point to a valid task");
+    return false;
+  }
+
+  struct todo_t* task = todos->todos[id-1];
+
+  // now move all the tasks after this one back one position
+  for (int i=id; i<todos->len; i++) {
+    todos->todos[i-1] = todos->todos[i];
+  }
+  todos->len--;
+
+  free_todo(task);
+  return true;
 }

@@ -10,6 +10,9 @@ OUT = src/main
 $(OUT): $(OBJFILES)
 
 
-.PHONY: clean
+.PHONY: clean install
 clean:
 	rm -f $(OBJFILES) $(OUT)
+install:
+	sudo cp ./src/main /usr/local/bin/todo
+

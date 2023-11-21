@@ -3,13 +3,18 @@
 A simple task tracker tool for the command line
 
 #+begin_src sh :results output
-./todo
+todo -p
 #+end_src
+
+#+RESULTS:
+: 1.  [ ] create lambda user group in IAM              Created: Mon Nov 20 11:46:41 2023
+: 2.  [ ] schedule eye appointment                     Created: Mon Nov 20 11:51:55 2023
+
 
 
 ** Ideas
+ * config file to control default settings
+   * like ~-p~ for plain printing (or env vars?)
  - add flags to handle different actions
-   - delete
-   - update state
    - reorder
  - support "projects" by utilizing different files

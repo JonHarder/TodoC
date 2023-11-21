@@ -24,7 +24,7 @@ struct todo_t* create_todo(char* task) {
   return todo;
 }
 
-void print_todo(struct todo_t todo) {
+void print_todo(struct todo_t todo, bool plain) {
   char time_str[64];
   strftime(time_str, sizeof(time_str), "%c", todo.added);
   char state_str[8];
@@ -43,7 +43,11 @@ void print_todo(struct todo_t todo) {
     exit(1);
   }
   
-  printf("%s %-45s\e[3mCreated: %s\e[0m\n", state_str, todo.task, time_str);
+  if (plain) {
+    printf("%s %-45sCreated: %s\n", state_str, todo.task, time_str);
+  } else {
+    printf("%s %-45s\e[3mCreated: %s\e[0m\n", state_str, todo.task, time_str);
+  }
 }
 
 struct tm* parse_iso8601_time(char* str) {
