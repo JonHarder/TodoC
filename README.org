@@ -60,11 +60,33 @@ A simple task tracker tool for the command line
   : 1.  [X] Replace filter                               Created: Mon Nov 20 19:26:20 2023
   : 2.  [ ] File taxes                                   Created: Mon Nov 20 19:29:52 2023
 
+  A full help and usage description is available through the ~-h~ flag.
+
+  #+begin_src sh :results output :exports both
+    todo -h
+  #+end_src
+
+  #+RESULTS:
+  #+begin_example
+  Usage: todo [arguments]
+     Or: todo <task>
+
+  Arguments:
+    -c			Clear the current todo list of all tasks (can't be undone)
+    -r <id>		Remove task in position <id>
+    -h			Print this help
+    -l			List tasks (implied action when no arguments given)
+    -t <task>		Add the task <task> to the list
+    -p			Print tasks plainly e.g. without any ascii formatting characters
+    -u <id>		Update the task number <id> to the next status
+  #+end_example
+
 ** Ideas
  * add ~due~ field
    * additional formatting for tasks that are:
-     1. near due
-     2. overdue
+     1. near due (orange)
+     2. overdue (red)
+   * color and interval configured through config file?
  * add new items to top of list?
  * config file to control default settings
    * setting flags like ~-p~ for plain printing (or env vars?)
