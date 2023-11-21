@@ -7,7 +7,7 @@ A simple task tracker tool for the command line
 
   Just call the binary to print the current list of tasks[fn:1]
 
-  #+begin_src sh :results output
+  #+begin_src sh :results output :exports both
   todo -p
   #+end_src
   
@@ -18,7 +18,7 @@ A simple task tracker tool for the command line
   Adding a task is easy. Just tell ~todo~ what you need to do (using quotes
   to avoid shell argument parsing and/or globbing)
 
-  #+begin_src sh :results output
+  #+begin_src sh :results output :exports both
     todo -p 'File taxes'
   #+end_src
 
@@ -29,7 +29,7 @@ A simple task tracker tool for the command line
 
   And updating can be done using ~-u~:
 
-  #+begin_src sh :results output
+  #+begin_src sh :results output :exports both
     todo -p -u 2
   #+end_src
 
@@ -41,7 +41,7 @@ A simple task tracker tool for the command line
   Tasks are either in the =Todo= state, =In Progress=, or =Done= (represented
   by ~[ ]~, ~[-]~, and ~[X]~, respectively)
 
-  #+begin_src sh :results output
+  #+begin_src sh :results output :exports both
     todo -p -u 2
   #+end_src
 
@@ -52,7 +52,7 @@ A simple task tracker tool for the command line
 
   Tasks can be removed from the list with ~-r <num>~:
 
-  #+begin_src sh :results output
+  #+begin_src sh :results output :exports both
     todo -p -r 1
   #+end_src
 
