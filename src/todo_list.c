@@ -35,6 +35,9 @@ void add_todo(struct todo_list_t* todos, struct todo_t* todo) {
 void free_todo(struct todo_t* todo) {
   free(todo->task);
   free(todo->added);
+  if(todo->due != NULL) {
+    free(todo->due);
+  }
   free(todo);
 }
 

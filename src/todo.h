@@ -12,6 +12,8 @@ struct todo_t {
   char* task;
   // owned reference to the allocated memory of 'added'
   struct tm* added;
+  // owned reference. nullable
+  struct tm* due;
   enum todo_state state;
 };
 

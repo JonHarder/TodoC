@@ -20,6 +20,7 @@ struct todo_t* create_todo(char* task) {
   localtime_r(&now, time);
   todo->added = time;
   todo->state = TODO;
+  todo->due = NULL;
   
   return todo;
 }
@@ -27,6 +28,8 @@ struct todo_t* create_todo(char* task) {
 void print_todo(struct todo_t todo, bool plain) {
   char time_str[64];
   strftime(time_str, sizeof(time_str), "%c", todo.added);
+  char due_str[64];
+  strftime(due_str, sizeof(due_str), "%c", todo.due);
   char state_str[8];
   switch(todo.state) {
   case TODO:
@@ -44,9 +47,17 @@ void print_todo(struct todo_t todo, bool plain) {
   }
   
   if (plain) {
-    printf("%s %-45sCreated: %s\n", state_str, todo.task, time_str);
+    if (todo.due != NULL) {
+      printf("%s %-35sCreated: %s, due: %s\n", state_str, todo.task, time_str, due_str);
+    } else {
+      printf("%s %-35sCreated: %s\n", state_str, todo.task, time_str);
+    }
   } else {
-    printf("%s %-45s\e[3mCreated: %s\e[0m\n", state_str, todo.task, time_str);
+    if (todo.due != NULL) {
+      printf("%s %-35s\e[3mCreated: %s\e[0m, due: %s\n", state_str, todo.task, time_str, due_str);
+    } else {
+      printf("%s %-35s\e[3mCreated: %s\e[0m\n", state_str, todo.task, time_str);
+    }
   }
 }
 
@@ -57,14 +68,17 @@ struct tm* parse_iso8601_time(char* str) {
 }
 
 struct todo_t* read_todo(char* str) {
-    enum todo_state state;
-    char task[64];
-    char added[21];
-    sscanf(str, "%i|%[^|]|%s", &state, task, added);
-
-    struct tm* time = parse_iso8601_time(added);
-    struct todo_t* todo = create_todo(task);
-    todo->added = time;
-    todo->state = state;
-    return todo;
+  enum todo_state state;
+  char task[64];
+  char added[21];
+  char due[21];
+  sscanf(str, "%i|%[^|]|%[^|]|%s", &state, task, added, due);
+  
+  struct tm* time = parse_iso8601_time(added);
+  struct tm* due_time = parse_iso8601_time(due);
+  struct todo_t* todo = create_todo(task);
+  todo->added = time;
+  todo->state = state;
+  todo->due = due_time;
+  return todo;
 }
